@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaerr Client</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .title {
+            font-size: 3em;
+            color: #ffcc00;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        .download-section {
+            margin: 20px 0;
+        }
+
+        .download-button {
+            font-size: 1.5em;
+            padding: 15px 40px;
+            cursor: pointer;
+            background-color: #212121;  
+            color: #fff;                
+            border: 2px solid #fff;     
+            border-radius: 12px;        
+            display: inline-flex;       
+            align-items: center;        
+            justify-content: center;   
+            transition: background-color 0.3s, transform 0.2s;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+        }
+
+        .download-button:before {
+            content: "⬇";              
+            margin-right: 10px;         
+        }
+
+        .download-button:hover {
+            background-color: #0d6efd;  
+            transform: translateY(-2px); 
+        }
+
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #555;
+        }
+
+        .footer nav a {
+            margin: 0 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer nav a:hover {
+            color: #0056b3;
+        }
+
+        .dark-mode {
+            background-color: #1c1c1c;
+            color: #f0f0f0;
+        }
+
+        .dark-mode .container {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+
+        .dark-mode .title {
+            color: #ffcc00;
+        }
+
+        .dark-mode .download-button {
+            background-color: #555;
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .dark-mode .download-button:hover {
+            background-color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Blaerr Client</h1>
+        <div class="download-section">
+            <button id="downloadButton" class="download-button">Start Download</button>
+        </div>
+        <p class="note">Client is not released!</p>
+        <footer class="footer">
+            <nav>
+                <a href="comingsoon" target="_blank">Discord</a>
+                <a href="comingsoon" target="_blank">GitHub</a>
+                <a href="store" target="_blank">Store</a>
+                <a href="#" id="themeToggle" class="theme-toggle">Dark</a>
+            </nav>
+        </footer>
+    </div>
+
+    <script>
+        const savedTheme = localStorage.getItem("theme") || "light";
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+            document.getElementById("themeToggle").textContent = "Light";
+        }
+
+        const themeToggle = document.getElementById("themeToggle");
+        themeToggle.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.body.classList.toggle("dark-mode");
+            const isDarkMode = document.body.classList.contains("dark-mode");
+            themeToggle.textContent = isDarkMode ? "Light" : "Dark";
+            localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        });
+
+        document.getElementById("downloadButton").addEventListener("click", () => {
+            const downloadLink = document.createElement("a");
+            downloadLink.href = "BlaerrClient-Installer.exe";
+            downloadLink.download = "BlaerrClient-Installer.exe";
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        });
+    </script>
+</body>
+</html>
